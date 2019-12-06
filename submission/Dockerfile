@@ -50,13 +50,13 @@ RUN pip3 install -U "tensorflow==1.*"
 RUN pip3 install matplotlib tqdm libtiff scipy Pillow scikit-image opencv-python imgaug IPython geopandas keras imantics simplification scikit-learn chainer tensorboard tensorboardX
 
 #ADD xview-2 /code/xview-2/
-RUN git clone https://github.com/DIUx-xView/xview2-baseline.git ~/code/xview-2
+RUN git clone https://github.com/catskillsresearch/xview2-catskills.git ~/code/xview-2
 
 # Grabbing weights for our models
 # UNCOMMENT THIS WHEN REPO/WEIGHTS ARE PUBLIC
-RUN curl -L https://github.com/DIUx-xView/xView2/releases/download/v1.0/localization.h5 -o ~/code/xview-2/weights/localization.h5
-RUN curl -L https://github.com/DIUx-xView/xView2/releases/download/v1.0/classification.hdf5 -o ~/code/xview-2/weights/classification.hdf5
 
+RUN curl -L https://github.com/catskillsresearch/xview2-catskills/releases/download/v_catskills_0.0.0/localization.hdf5 -o ~/code/xview-2/weights/localization.h5
+RUN curl -L https://github.com/catskillsresearch/xview2-catskills/releases/download/v_catskills_0.0.0/classification.hdf5 -o ~/code/xview-2/weights/classification.hdf5
 
 # Finally running the container with the run.sh wrapper script to pass the CLI arguments to inference.sh
 RUN chmod +x ~/code/xview-2/submission/run.sh
