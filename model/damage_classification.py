@@ -36,7 +36,7 @@ from collections import defaultdict
 
 import tensorflow as tf
 import keras
-import ast
+import ast, os
 from keras import Sequential
 from keras.layers import Conv2D, MaxPooling2D, Dense, Flatten, Add, Input, Concatenate
 from keras.models import Model
@@ -55,7 +55,7 @@ NUM_EPOCHS = 100
 LEARNING_RATE = 0.0001
 RANDOM_SEED = 123
 LOG_STEP = 150
-LOG_DIR = '/path/to/logs' + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+LOG_DIR = os.getenv('LOG_DIR') + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
 
 damage_intensity_encoding = dict()
 damage_intensity_encoding[3] = '3'
