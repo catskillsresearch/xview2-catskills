@@ -96,8 +96,6 @@ def gen_uuid():
     return str(uuid4())
 
 def inference(image, score, output_file):
-    building_score = score[1]
-    
     building_mask_pred = (np.argmax(score, axis=0) == 1)
     polygons = Mask(building_mask_pred).polygons()
     

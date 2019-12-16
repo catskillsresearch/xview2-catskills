@@ -146,7 +146,6 @@ python3 ./process_data_inference.py --input_img "$disaster_post_file" --label_pa
 
 # Classifying extracted polygons 
 python3 ./damage_inference.py --test_data "$inference_base"/output_polygons --test_csv "$inference_base"/output.csv --model_weights "$classification_weights" --output_json /tmp/inference/classification_inference.json
-
 printf "\n"
 
 # Combining the predicted polygons with the predicted labels, based off a UUID generated during the localization inference stage  
@@ -164,3 +163,7 @@ python3 "$XBDIR"/utils/inference_image_output.py --input "$inference_base"/infer
 
 printf "==========\n"
 printf "Done!\n"
+
+ls "$label_temp"/"${input_image%.*}".json
+ls "$inference_base/inference.json" 
+ls /tmp/inference/classification_inference.json

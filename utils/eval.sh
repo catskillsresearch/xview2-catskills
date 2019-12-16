@@ -34,3 +34,6 @@ python ${CODE_DIR}/utils/inference_image_output.py --input ${POST_JSON_SRC} --ou
 cp ${TGT_DAMAGE_PNG} ${TGT_LOCAL_PNG} 
 
 python xview2_metrics.py --pred_dir ${TESTCASE_PRED} --targ_dir ${TESTCASE_TGT} --out_fp ${TESTCASE_SCORE}
+
+ls ${PRE_JSON_SRC}
+ls ${POST_JSON_SRC}

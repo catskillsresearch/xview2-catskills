@@ -1,0 +1,6 @@
+/home/catskills/Desktop/dataxv2/xBD/santa-rosa-wildfire/labels/santa-rosa-wildfire_00000030_pre_disaster.json
+/home/catskills/Desktop/dataxv2/xBD/santa-rosa-wildfire/labels/santa-rosa-wildfire_00000030_post_disaster.json
+/tmp/inference/santa-rosa-wildfire_00000030_pre_disaster/labels/santa-rosa-wildfire_00000030_pre_disaster.json
+/tmp/inference/inference.json
+/tmp/inference/classification_inference.json
+/home/catskills/Desktop/dataxv2/scoretest/score.json
