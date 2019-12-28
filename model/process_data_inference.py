@@ -29,9 +29,6 @@ import datetime
 
 import shapely.wkt
 import shapely
-from shapely.geometry import Polygon
-from collections import defaultdict
-
 
 def process_img(img_array, polygon_pts, scale_pct):
     """Process Raw Data into
@@ -89,6 +86,7 @@ def process_img_poly(img_path, label_path,  output_dir, output_csv):
         poly_img = process_img(img_array, polygon_pts, 0.8)
 
         # Write out the polygon in its own image
+        fn = output_dir + "/" + poly_uuid
         cv2.imwrite(output_dir + "/" + poly_uuid, poly_img)
         x_data.append(poly_uuid)
 

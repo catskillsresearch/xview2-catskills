@@ -26,14 +26,10 @@ import logging
 import json
 import cv2
 import datetime
-
 from sklearn.metrics import f1_score
 from sklearn.utils.class_weight import compute_class_weight
 import shapely.wkt
 import shapely
-from shapely.geometry import Polygon
-from collections import defaultdict
-
 import tensorflow as tf
 import keras
 import ast, os
@@ -51,7 +47,8 @@ logging.basicConfig(level=logging.INFO)
 NUM_WORKERS = 4 
 NUM_CLASSES = 4
 BATCH_SIZE = 64
-NUM_EPOCHS = 100 
+#NUM_EPOCHS = 100
+NUM_EPOCHS = 1
 LEARNING_RATE = 0.0001
 RANDOM_SEED = 123
 LOG_STEP = 150
@@ -107,8 +104,8 @@ def validation_generator(test_csv, test_dir):
     df = pd.read_csv(test_csv)
     df = df.replace({"labels" : damage_intensity_encoding })
 
-    gen = keras.preprocessing.image.ImageDataGenerator(
-                             rescale=1.4)
+    gen = keras.preprocessing.image.ImageDataGenerator()
+#                             rescale=1.4)
 
 
     return gen.flow_from_dataframe(dataframe=df,
@@ -128,11 +125,11 @@ def validation_generator(test_csv, test_dir):
 def augment_data(df, in_dir):
 
     df = df.replace({"labels" : damage_intensity_encoding })
-    gen = keras.preprocessing.image.ImageDataGenerator(horizontal_flip=True,
-                             vertical_flip=True,
-                             width_shift_range=0.1,
-                             height_shift_range=0.1,
-                             rescale=1.4)
+    gen = keras.preprocessing.image.ImageDataGenerator(vertical_flip=True)
+# horizontal_flip=True,
+#                             width_shift_range=0.1,
+#                             height_shift_range=0.1,
+#                             rescale=1.4)
     return gen.flow_from_dataframe(dataframe=df,
                                    directory=in_dir,
                                    x_col='uuid',
@@ -196,16 +193,16 @@ def train_model(train_data, train_csv, test_data, test_csv, model_in, model_out)
                         verbose=1)
 
 
-    #Evalulate f1 weighted scores on validation set
-    validation_gen = validation_generator(test_csv, test_data)
-    predictions = model.predict(validation_gen)
-
-    val_trues = validation_gen.classes
-    val_pred = np.argmax(predictions, axis=-1)
-
-    f1_weighted = f1_score(val_trues, val_pred, average='weighted')
-    print(f1_weighted)
-
+    try:
+        #Evalulate f1 weighted scores on validation set
+        validation_gen = validation_generator(test_csv, test_data)
+        predictions = model.predict(validation_gen)
+        val_trues = validation_gen.classes
+        val_pred = np.argmax(predictions, axis=-1)
+        f1_weighted = f1_score(val_trues, val_pred, average='weighted')
+        print(f1_weighted)
+    except:
+        pass
 
 def main():
 
@@ -241,4 +238,7 @@ def main():
 
 
 if __name__ == '__main__':
+    import os
+#    os.environ["CUDA_VISIBLE_DEVICES"]="1" # second gpu
+    print(K.tensorflow_backend._get_available_gpus()) # list of strings
     main()

@@ -31,7 +31,6 @@ from sklearn.metrics import f1_score
 from sklearn.utils.class_weight import compute_class_weight
 import shapely.wkt
 import shapely
-from shapely.geometry import Polygon
 from collections import defaultdict
 
 import tensorflow as tf

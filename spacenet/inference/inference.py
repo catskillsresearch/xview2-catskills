@@ -15,7 +15,7 @@
 
 import resource
 import sys
-sys.path.append('../src/models')
+sys.path.append('/home/catskills/Desktop/xview2-catskills/spacenet/src/models')
 
 from segmentation_cpu import SegmentationModel as Model
 from os import path
@@ -120,6 +120,20 @@ def inference(image, score, output_file):
     with open(output_file, 'w') as out_file:
         json.dump(output_json, out_file)
 
+from pred_vars import *
+
+the_model = None
+
+def localization_init():
+    global the_model
+    mean = np.load(MEAN_MODEL)
+    the_model = Model(LOCALIZATION_MODEL, mean)
+
+def localize(image_fn, output_fn):
+    image = np.array(Image.open(image_fn))
+    score = the_model.apply_segmentation(image)
+    inference(image, score, output_fn)
+    
 if __name__ == "__main__": 
     import argparse
 

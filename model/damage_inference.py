@@ -31,8 +31,6 @@ import datetime
 
 import shapely.wkt
 import shapely
-from shapely.geometry import Polygon
-from collections import defaultdict
 
 import tensorflow as tf
 import keras
@@ -107,7 +105,6 @@ def run_inference(test_data, test_csv, model_weights, output_json_path):
    test_gen = create_generator(df, test_data, output_json_path)
    test_gen.reset()
    samples = df["uuid"].count()
-
    steps = np.ceil(samples/BATCH_SIZE)
 
    tensorboard_callbacks = keras.callbacks.TensorBoard(log_dir=LOG_DIR, histogram_freq=1)

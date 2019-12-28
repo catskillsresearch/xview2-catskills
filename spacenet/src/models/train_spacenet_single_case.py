@@ -3,7 +3,7 @@
 
 # Overtrain Spacenet on each image one by one
 
-import sys, glob
+import sys, glob, random
 import numpy as np
 from PIL import Image
 import chainer
@@ -19,7 +19,7 @@ CODE_DIR=f'{DESKTOP}/xview2-catskills'
 MODEL_DIR=f'{DATA_DIR}/localization_overtrain'
 TRAIN_DIR=f'{DATA_DIR}/spacenet_gt_whole'
 
-weights=f'{MODEL_DIR}/model_ot_00000.hdf5'
+weights=f'{DATA_DIR}/release/v_catskills_0.1.1/localization.hdf5'
 mean=f'{CODE_DIR}/weights/mean.npy'
 mean = np.load(mean)
 model = Model(weights, mean)
@@ -28,10 +28,8 @@ optimizer = chainer.optimizers.Adam()
 optimizer.setup(model._SegmentationModel__model);
 
 images=glob.glob(f'{TRAIN_DIR}/images/*')
-
+random.shuffle(images)
 train_iteration = 0
-
-print(f'{MODEL_DIR}/model_ot_{train_iteration:05d}.hdf5')
 
 n_images = len(images)
 
@@ -48,7 +46,7 @@ for image_count, input in enumerate(images):
 
     accuracy = 0
     image_iteration = 0
-    while accuracy < 0.9999 and image_iteration <= 300:
+    while image_iteration <= 5:
         with chainer.using_config('train', True):
             score_cuda= model._SegmentationModel__model.forward(image_in)
             loss = F.softmax_cross_entropy(score_cuda, gt_in)
@@ -58,8 +56,7 @@ for image_count, input in enumerate(images):
             optimizer.update()
             image_iteration += 1
             train_iteration += 1
-        if image_iteration % 20 == 0:
-            print(f'[{i}; {image_count+1}/{n_images}] {image_name}: loss {100*float_to_cpu(loss):.1f}% accuracy {100*accuracy:.1f}%')
-        if train_iteration % 500 == 0:
-            new_weights=f'{MODEL_DIR}/model_ot_{train_iteration:05d}.hdf5'
-            serializers.save_npz(new_weights, model._SegmentationModel__model)
+            print(f'[{train_iteration} {image_iteration}; {image_count+1}/{n_images}] {image_name}: loss {100*float_to_cpu(loss):.1f}% accuracy {100*accuracy:.1f}%')
+            if train_iteration % 500 == 0:
+                new_weights=f'{MODEL_DIR}/model_ot2_{train_iteration:05d}.hdf5'
+                serializers.save_npz(new_weights, model._SegmentationModel__model)
