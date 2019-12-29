@@ -5,7 +5,7 @@ DATADIR=f'{USERDIR}/dataxv2'
 PROJECT='xview2-catskills'
 CODEDIR=f'{USERDIR}/{PROJECT}'
 
-VERSION='v_catskills_0.2.0'
+VERSION='v_catskills_0.2.1'
 MODEL_DIR=f'/home/catskills/Desktop/dataxv2/release/{VERSION}'
 LOCALIZATION_MODEL=f'{MODEL_DIR}/localization.hdf5'
 DAMAGE_MODEL=f'{MODEL_DIR}/classification.hdf5'

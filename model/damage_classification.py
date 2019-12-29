@@ -47,8 +47,8 @@ logging.basicConfig(level=logging.INFO)
 NUM_WORKERS = 4 
 NUM_CLASSES = 4
 BATCH_SIZE = 64
-#NUM_EPOCHS = 100
-NUM_EPOCHS = 1
+NUM_EPOCHS = 300
+#NUM_EPOCHS = 1
 LEARNING_RATE = 0.0001
 RANDOM_SEED = 123
 LOG_STEP = 150
@@ -239,6 +239,6 @@ def main():
 
 if __name__ == '__main__':
     import os
-#    os.environ["CUDA_VISIBLE_DEVICES"]="1" # second gpu
+    os.environ["CUDA_VISIBLE_DEVICES"]="1" # second gpu
     print(K.tensorflow_backend._get_available_gpus()) # list of strings
     main()

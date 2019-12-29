@@ -2,9 +2,12 @@
 
 from IPython.utils.path import ensure_dir_exists
 from pred_vars import *
-ensure_dir_exists(SUBMIT_DIR)
-ensure_dir_exists(INFER_DIR)
 
-print('inference:', INFER_DIR)
-print('submission:', SUBMIT_DIR)
-
+for x in [VDIR,
+          TESTDIR,
+          INFER_DIR,
+          POLYDIR,
+          SUBMIT_DIR,
+          COMBINED_JSON]:
+    ensure_dir_exists(x)
+    print(x)

@@ -12,7 +12,7 @@ def mask_out_image_and_rotate_to_minimum_area_chip(img_path_post, output_dir):
         if feat_pre['properties']['uid'] != uid:
             raise ValueError('shouldnt happen')
         polygon_geom = shapely.wkt.loads(feat_pre['wkt'])
-#        mask_out_image_and_rotate_to_minimum_area_chip_feature(output_dir, uid, polygon_geom, img_pre, img_post)
+        mask_out_image_and_rotate_to_minimum_area_chip_feature(output_dir, uid, polygon_geom, img_pre, img_post)
         poly_uuid = f"{uid}.png"
         x_data.append(poly_uuid)
     return x_data

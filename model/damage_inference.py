@@ -86,7 +86,10 @@ def create_generator(test_df, test_dir, output_json_path):
 
 # Runs inference on given test data and pretrained model
 def run_inference(test_data, test_csv, model_weights, output_json_path):
-
+   print('test_data', test_data)
+   print('test_csv', test_csv)
+   print('model_weights', model_weights)
+   print('output_json_path', output_json_path)
    model = generate_xBD_baseline_model()
    model.load_weights(model_weights)
 

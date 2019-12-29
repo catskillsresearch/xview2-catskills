@@ -7,19 +7,18 @@ from subprocess import call
 from IPython.utils.path import ensure_dir_exists
 
 # os.environ["CUDA_VISIBLE_DEVICES"]="1" # second gpu
-VERSION='v_catskills_0.2.0'
+VERSION='v_catskills_0.2.1'
 PROJECT='xview2-catskills'
-USERDIR='/home/catskills/Desktop/'
-CODEDIR=f'{USERDIR}{PROJECT}'
-DATADIR=f'{USERDIR}dataxv2/'
-TESTDIR=f'{DATADIR}test/images/'
-SUBMIT_DIR=f'{DATADIR}{VERSION}_submit_001'
-MODEL_DIR=f'/home/catskills/Desktop/dataxv2/release/{VERSION}/'
-LOCALIZATION_MODEL=f'{MODEL_DIR}localization.hdf5'
-DAMAGE_MODEL=f'{MODEL_DIR}classification.hdf5'
+USERDIR='/home/catskills/Desktop'
+CODEDIR=f'{USERDIR}/{PROJECT}'
+DATADIR=f'{USERDIR}/dataxv2'
+TESTDIR=f'{DATADIR}/test/images/'
+SUBMIT_DIR=f'{DATADIR}/{VERSION}_submit_001'
+MODEL_DIR=f'/home/catskills/Desktop/dataxv2/release/{VERSION}'
+LOCALIZATION_MODEL=f'{MODEL_DIR}/localization.hdf5'
+DAMAGE_MODEL=f'{MODEL_DIR}/classification.hdf5'
 
 ensure_dir_exists(SUBMIT_DIR)
-
 
 files = glob.glob(f'{TESTDIR}test_pre_*.png')
 

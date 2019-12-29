@@ -86,12 +86,14 @@ def train_model():
     # Set up a neural network to train
     # Classifier reports softmax cross entropy loss and accuracy at every
     # iteration, which will be used by the PrintReport extension below.
-    DESKTOP='/home/catskills/Desktop'
-    DATA_DIR=f'{DESKTOP}/dataxv2'
-    CODE_DIR=f'{DESKTOP}/xview2-catskills'
-    weights=f'/home/catskills/Desktop/dataxv2/spacenet_gt_whole/models/model_iter_1712'
-    mean=f'{CODE_DIR}/weights/mean.npy'
-    mean = np.load(mean)
+    weights=os.getenv('LOCALIZATION_MODEL')
+
+    # Load mean image
+    mean_path=os.path.join(args.dataset, "mean.npy")
+    print(mean_path)
+    mean = np.load(mean_path)
+
+    # Model
     segmentation_model = Model(weights, mean)
     model = segmentation_model._SegmentationModel__model
     if args.gpu >= 0:
@@ -103,9 +105,7 @@ def train_model():
     optimizer = chainer.optimizers.Adam()
     optimizer.setup(model)
     
-    # Load mean image
-    mean = np.load(os.path.join(args.dataset, "mean.npy"))
-    
+   
     # Load the MNIST dataset
     train = LabeledImageDataset(os.path.join(args.dataset, "train.txt"), args.images, args.labels, 
                                 mean=mean, crop_size=args.tcrop, test=False, distort=False)
