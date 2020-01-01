@@ -7,7 +7,7 @@ for x in [VDIR,
           TESTDIR,
           INFER_DIR,
           POLYDIR,
-          SUBMIT_DIR,
+          PREDICTION,
           COMBINED_JSON]:
     ensure_dir_exists(x)
     print(x)

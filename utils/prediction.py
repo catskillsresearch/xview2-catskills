@@ -7,7 +7,7 @@ from subprocess import call
 from IPython.utils.path import ensure_dir_exists
 
 # os.environ["CUDA_VISIBLE_DEVICES"]="1" # second gpu
-VERSION='v_catskills_0.2.1'
+VERSION=os.getenv('VERSION')
 PROJECT='xview2-catskills'
 USERDIR='/home/catskills/Desktop'
 CODEDIR=f'{USERDIR}/{PROJECT}'

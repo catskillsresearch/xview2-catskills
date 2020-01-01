@@ -1,5 +1,5 @@
-export VERSION=0.2.1
-#python pred_preamble.py
+export VERSION=0.2.2
+python pred_preamble.py
 #python pred_localization.py
 #python pred_extract_polygons.py
 #python pred_damage.py

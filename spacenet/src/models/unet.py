@@ -18,7 +18,7 @@
 import chainer
 import chainer.functions as F
 import chainer.links as L
-
+from polygon_loss_from_cuda_gt_mask import polygon_loss_from_cuda_gt_mask
 
 class UNet(chainer.Chain):
 
@@ -110,6 +110,9 @@ class UNet(chainer.Chain):
         h = self.forward(x)
         
         loss = F.softmax_cross_entropy(h, t, ignore_label=self.__ignore_label)
+        poly_loss = polygon_loss_from_cuda_gt_mask(h, t)
+        loss += 0.3*poly_loss
+
         accuracy = F.accuracy(h, t, ignore_label=self.__ignore_label)
         
         chainer.report({'loss': loss, 'accuracy': accuracy}, self)

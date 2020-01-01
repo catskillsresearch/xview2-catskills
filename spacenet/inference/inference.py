@@ -17,13 +17,14 @@ import resource
 import sys
 sys.path.append('/home/catskills/Desktop/xview2-catskills/spacenet/src/models')
 
-from segmentation_cpu import SegmentationModel as Model
+#from segmentation_cpu import SegmentationModel as Model
+from segmentation import SegmentationModel as Model
 from os import path
 from PIL import Image
 import numpy as np
 from uuid import uuid4
 import json
-from imantics import Polygons, Mask
+from imantics import Mask
 from simplification.cutil import simplify_coords_vwp
 
 def create_wkt(polygon):

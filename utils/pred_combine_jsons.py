@@ -2,6 +2,7 @@
 
 import sys, json, glob
 from pred_vars import *
+from tqdm import tqdm
 
 def combine_output(LOCALIZE_JSON, DAMAGE_JSON):
     """
@@ -14,7 +15,7 @@ def combine_output(LOCALIZE_JSON, DAMAGE_JSON):
         label_json = json.load(damages)
 
     polygon_jsons = glob.glob(f"{LOCALIZE_JSON}/*.json")
-    for pred_polygons in polygon_jsons:
+    for pred_polygons in tqdm(polygon_jsons):
 
         # Skeleton of the json with null values 
         output_json = {
